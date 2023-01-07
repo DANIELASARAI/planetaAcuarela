@@ -1,7 +1,7 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { url, setHeaders } from "./api";
 import { toast } from "react-toastify";
+import { setHeaders } from "./api";
 
 const initialState = {
   items: [],
@@ -13,8 +13,9 @@ export const productsFetch = createAsyncThunk(
   "products/productsFetch",
   async () => {
     try {
-      const response = await axios.get("http://localhost:8000/api/products");
-      console.log("🚀 ~ file: productsRedux.js:17 ~  response", response);
+      const response = await axios.get(
+        "https://planeta-acuarela.vercel.app/api/products"
+      );
 
       return response.data;
     } catch (error) {
@@ -28,7 +29,7 @@ export const productsCreate = createAsyncThunk(
   async (values) => {
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/products",
+        "https://planeta-acuarela.vercel.app/api/products",
         values,
         setHeaders()
       );

@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { url } from "./api";
 import jwtDecode from "jwt-decode";
 
 const initialState = {
@@ -20,11 +19,14 @@ export const registerUser = createAsyncThunk(
   "registerUser",
   async (values, { rejectWithValue }) => {
     try {
-      const token = await axios.post("http://localhost:8000/api/register", {
-        name: values.name,
-        email: values.email,
-        password: values.password,
-      });
+      const token = await axios.post(
+        "https://planeta-acuarela.vercel.app/api/register",
+        {
+          name: values.name,
+          email: values.email,
+          password: values.password,
+        }
+      );
 
       localStorage.setItem("token", token.data);
 
@@ -39,10 +41,13 @@ export const loginUser = createAsyncThunk(
   "loginUser",
   async (user, { rejectWithValue }) => {
     try {
-      const token = await axios.post("http://localhost:8000/api/login", {
-        email: user.email,
-        password: user.password,
-      });
+      const token = await axios.post(
+        "https://planeta-acuarela.vercel.app/api/login",
+        {
+          email: user.email,
+          password: user.password,
+        }
+      );
 
       localStorage.setItem("token", token.data);
 
