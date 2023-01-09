@@ -13,9 +13,7 @@ export const productsFetch = createAsyncThunk(
   "products/productsFetch",
   async () => {
     try {
-      const response = await axios.get(
-        "https://planeta-acuarela.vercel.app/api/products"
-      );
+      const response = await axios.get("http://localhost:8000/api/products");
 
       return response.data;
     } catch (error) {
@@ -29,7 +27,7 @@ export const productsCreate = createAsyncThunk(
   async (values) => {
     try {
       const response = await axios.post(
-        "https://planeta-acuarela.vercel.app/api/products",
+        "http://localhost:8000/api/products",
         values,
         setHeaders()
       );

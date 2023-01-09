@@ -207,6 +207,7 @@ const Remove = styled.div`
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
   const auth = useSelector((state) => state.auth);
+  console.log("🚀 ~ file: Cart.jsx:210 ~ Cart ~ auth", auth);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
