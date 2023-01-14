@@ -1,8 +1,7 @@
-import styled from "styled-components";
-import { Outlet, NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { mobile } from "../responsive";
-import Navbar from "./Navbar";
+import { Outlet } from "react-router-dom";
+import styled from "styled-components";
+import Sidebar from "./Sidebar";
 
 const Dashboard = () => {
   const auth = useSelector((state) => state.auth);
@@ -12,9 +11,10 @@ const Dashboard = () => {
 
   return (
     <>
-      <Navbar />
+      {/*      <Navbar /> */}
       <StyledDashboard>
-        <SideNav>
+        <Sidebar />
+        {/* <SideNav>
           <Title>Admin Planet</Title>
           <NavLink
             className={({ isActive }) =>
@@ -48,7 +48,7 @@ const Dashboard = () => {
           >
             Users
           </NavLink>
-        </SideNav>
+        </SideNav> */}
         <Content>
           <Outlet />
         </Content>

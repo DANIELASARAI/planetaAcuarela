@@ -1,3 +1,4 @@
+import "./App.css";
 import CheckoutSuccess from "./components/CheckoutSuccess";
 import Cart from "./pages/Cart";
 import GuestAddress from "./pages/GuestAddress";
