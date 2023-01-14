@@ -1,29 +1,22 @@
-import React from "react";
-import styled from "styled-components";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { PrimaryButton } from "./CommonStyled";
-import { productsCreate } from "../redux/productsRedux";
-import { cat } from "../data";
-import { sizes } from "../data";
-import { genders } from "../data";
-import { subCats } from "../data";
-import { colors } from "../data";
-import { useTheme } from "@mui/material/styles";
+import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import {
   Box,
   Fab,
   FormControl,
+  Grid,
   InputLabel,
   MenuItem,
-  OutlinedInput,
   Select,
   TextField,
   ThemeProvider,
 } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
-import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import styled from "styled-components";
+import { cat, colors, genders, sizes, subCats } from "../data";
+import { productsCreate } from "../redux/productsRedux";
+import { mobile } from "../responsive";
 import { H4 } from "./Typography";
 
 const theme = createTheme({
@@ -120,7 +113,7 @@ const CreateProduct = () => {
   };
 
   return (
-    <StyledCreateProduct>
+    <Grid container spacing={3} paddingTop={1} paddingLeft={8}>
       <StyledForm onSubmit={handleSubmit}>
         <ThemeProvider theme={theme}>
           <Box
@@ -321,7 +314,7 @@ const CreateProduct = () => {
           <p>Previsualización de Imagen</p>
         )}
       </ImagePreview>
-    </StyledCreateProduct>
+    </Grid>
   );
 };
 
@@ -345,17 +338,16 @@ const StyledForm = styled.form`
   }
 `;
 
-const StyledCreateProduct = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
 const CargarProducto = styled.button`
   cursor: pointer;
-  width: 100%;
-  color: primary;
-  border-radius: 10px;
+  width: 60%;
+  padding: 1.5rem;
+  color: white;
+  border-radius: 20px;
   margin-bottom: 1rem;
+  margin-left: 3rem;
   border: 1px solid rgb(183, 183, 183);
+  background-color: #b279a8;
 `;
 
 const ImagePreview = styled.div`
@@ -373,4 +365,5 @@ const ImagePreview = styled.div`
   img {
     max-width: 100%;
   }
+  ${mobile({ width: "40%" })};
 `;

@@ -59,8 +59,9 @@ export const ItemsList = styled.ul`
 
 export const ItemContainer = styled.li`
   margin-top: 0.5rem;
-  width: 100%;
-  padding: 0.5rem 0.25rem;
+
+  width: 60%;
+  padding: 1rem 0.5rem;
   border-radius: 0.2rem;
   cursor: pointer;
   &:hover {
@@ -87,13 +88,17 @@ export const ItemName = styled.span`
 export const SidebarContainer = styled.div`
   position: absolute;
   left: 0;
+
   width: ${({ displaySidebar }) => (displaySidebar ? "15rem" : "5rem")};
   height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
   padding: 0.75rem;
   background: #f3f4f4;
   transition: width 350ms ease;
   border-right: 1px solid #d4d8dd;
-  overflow-x: hidden;
+
   ${({ displaySidebar }) =>
     displaySidebar && "box-shadow: 8px 0px 12px 0px rgba(0,0,0,0.1)"};
   ${ItemWrapper} {

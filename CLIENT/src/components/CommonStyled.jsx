@@ -8,7 +8,7 @@ export const AdminHeaders = styled.div`
 
 export const H1 = styled.h1`
   font-weight: bold;
-  font-family: Yomogi;
+  font-family: Poppins;
   font-size: 20px;
   color: gray;
 `;
