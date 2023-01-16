@@ -1,5 +1,5 @@
 import { SvgIcon } from "@mui/material";
-import React from "react";
+
 const BlankCheckBoxIcon = (props) => {
   return (
     <SvgIcon viewBox="0 0 22 22" {...props}>
