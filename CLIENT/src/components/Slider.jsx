@@ -137,7 +137,6 @@ const Slider = () => {
 
   return (
     <Container>
-      {/* 2)Create 2 arrows. Import some arrow icon from mui material icon. */}
       <Arrow direction="left" onClick={() => handleClick("left")}>
         <KeyboardArrowLeftIcon />
       </Arrow>

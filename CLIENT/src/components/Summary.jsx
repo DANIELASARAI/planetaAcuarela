@@ -82,7 +82,7 @@ const Summary = () => {
   `;
   const Overview = styled.div`
     color: rgba(234, 234, 255, 0.87);
-    background: #853b7d;
+    background: #603b81;
     width: 100%;
     padding: 1.5rem;
     height: 170px;

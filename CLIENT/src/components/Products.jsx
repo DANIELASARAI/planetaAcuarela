@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
-import Product from "./Product";
-import { useState, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-
+import PlanetContext from "../context/PlanetContext";
+import Product from "./Product";
 const Container = styled.div`
   padding: 20px;
   display: flex;
@@ -12,26 +12,18 @@ const Container = styled.div`
 `;
 
 const Products = ({ cat, filters, sort, subCat }) => {
-  console.log("🚀 ~ file: Products.jsx:15 ~ Products ~ cat", cat);
-  console.log("🚀 ~ file: Products.jsx:15 ~ Products ~ sort", sort);
-  console.log("🚀 ~ file: Products.jsx:15 ~ Products ~ sort", sort);
-  console.log("🚀 ~ file: Products.jsx:15 ~ Products ~ filters", filters);
   const { items: data, status } = useSelector((state) => state.products);
-  console.log("🚀 ~ file: Products.jsx:20 ~ Products ~ data", ...data);
-
+  const { planet } = useContext(PlanetContext);
+  console.log("🚀 ~ file: Products.jsx:17 ~ Products ~ planet", planet);
   const [productsByCat, setProductsByCat] = useState([]);
 
   const [filteredProducts, setFilteredProducts] = useState([]);
-  console.log(
-    "🚀 ~ file: Products.jsx:24 ~ Products ~ filteredProducts",
-    filteredProducts
-  );
 
   let productsCategory = data.filter(function (product) {
-    return product.categories == cat;
+    return product.categories == planet;
   });
   console.log(
-    "🚀 ~ file: Products.jsx:33 ~ productsCategory ~ productsCategory",
+    "🚀 ~ file: Products.jsx:25 ~ productsCategory ~ productsCategory",
     productsCategory
   );
 
@@ -42,7 +34,7 @@ const Products = ({ cat, filters, sort, subCat }) => {
       } catch (err) {}
     };
     getProductsByCat();
-  }, []);
+  }, [productsCategory]);
 
   useEffect(() => {
     cat &&
