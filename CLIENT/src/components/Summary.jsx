@@ -1,21 +1,55 @@
 import { MoneyOutlined, PieChartOutlined } from "@mui/icons-material";
 import { useTheme } from "@mui/material";
-import React from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
-
 import User from "../icons/User";
+import { setHeaders, url } from "../slices/api";
 import Widget from "./summaryComponents/Widget";
-
 const Summary = () => {
   const theme = useTheme();
+
+  const [users, setUsers] = useState([]);
+  const [usersPerc, setUsersPerc] = useState([]);
+  console.log("🚀 ~ file: Summary.jsx:14 ~ Summary ~ usersPerc", usersPerc);
+
+  function compare(a, b) {
+    if (a._id < b._id) {
+      return 1;
+    }
+    if (a._id > b._id) {
+      return -1;
+    }
+    return 0;
+  }
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await axios.get(`${url}/users/stats`, setHeaders());
+        res.data.sort(compare);
+        console.log(
+          "🚀 ~ file: Summary.jsx:23 ~ fetchData ~ response data",
+          res.data
+        );
+        setUsers(res.data);
+        setUsersPerc(
+          ((res.data[0].total - res.data[1].total) / res.data[1].total) * 100
+        );
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchData();
+  }, []);
+
   const data = [
     {
       Icon: <User />,
-      digits: 50,
+      digits: users[0]?.total,
       isMoney: false,
       title: "Usuarios",
       color: theme.palette.info.main,
-      percentage: 30,
+      percentage: usersPerc,
       bgcolor: theme.palette.info.light,
     },
     {

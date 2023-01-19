@@ -34,7 +34,7 @@ const Products = ({ cat, filters, sort, subCat }) => {
       } catch (err) {}
     };
     getProductsByCat();
-  }, [productsCategory]);
+  }, [planet]);
 
   useEffect(() => {
     cat &&

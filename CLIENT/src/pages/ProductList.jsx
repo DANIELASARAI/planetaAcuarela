@@ -14,6 +14,7 @@ const Title = styled.h1`
 `;
 const FilterContainer = styled.div`
   display: flex;
+  ${mobile({ width: "0px 20px", display: "flex", flexDirection: "column" })}
 `;
 const Filter = styled.div`
   margin: 20px;
@@ -23,7 +24,7 @@ const Filter = styled.div`
 `;
 
 const FilterText = styled.span`
-  font-size: 12px;
+  font-size: 10px;
   font-family: Poppins;
   font-weight: 300;
   margin-right: 20px;
@@ -32,9 +33,9 @@ const FilterText = styled.span`
 
 const Select = styled.select`
   padding: 10px;
-  border-radius: 15px;
-  margin-right: 20px;
-  ${mobile({ margin: "10px 0px" })}
+  border-radius: 20px;
+
+  ${mobile({ margin: "5px 0px" })}
 `;
 const Option = styled.option``;
 

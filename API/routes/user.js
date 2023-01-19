@@ -5,6 +5,8 @@ const {
   verifyTokenAdmin,
 } = require("./verifyToken");
 
+const { auth, isUser, isAdmin } = require("../middleware/auth");
+const moment = require("moment");
 const router = require("express").Router();
 
 //Update User
@@ -65,13 +67,17 @@ router.get("/", verifyTokenAdmin, async (req, res) => {
 });
 
 //Get User Stats
-router.get("/stats", verifyTokenAdmin, async (req, res) => {
-  const date = new Date();
-  const lastYear = new Date(date.setFullYear(date.getFullYear() - 1));
+router.get("/stats", async (req, res) => {
+  const previousMonth = moment()
+    .month(moment().month() - 1)
+    .set("date", -1)
+    .format("YYYY-MM-DD HH:mm:ss");
+
+  /* const lastYear = new Date(date.setFullYear(date.getFullYear() - 1)); */
 
   try {
-    const data = await User.aggregate([
-      { $match: { createdAt: { $gte: lastYear } } },
+    const users = await User.aggregate([
+      { $match: { createdAt: { $gte: new Date(previousMonth) } } },
       {
         $project: {
           month: { $month: "$createdAt" },
@@ -84,10 +90,13 @@ router.get("/stats", verifyTokenAdmin, async (req, res) => {
         },
       },
     ]);
-    res.status(200).json(data);
+    res.status(200).send(users);
   } catch (err) {
-    res.status(500).json(err);
+    console.log("🚀 ~ file: user.js:97 ~ router.get ~ err", err);
+    res.status(500).send(err);
   }
 });
+
+//Get User Stats
 
 module.exports = router;
