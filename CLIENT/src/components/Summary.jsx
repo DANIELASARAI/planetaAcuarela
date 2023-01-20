@@ -10,8 +10,13 @@ const Summary = () => {
   const theme = useTheme();
 
   const [users, setUsers] = useState([]);
-  const [usersPerc, setUsersPerc] = useState([]);
-  console.log("🚀 ~ file: Summary.jsx:14 ~ Summary ~ usersPerc", usersPerc);
+  const [usersPerc, setUsersPerc] = useState(0);
+  const [orders, setOrders] = useState([]);
+  const [ordersPerc, setOrdersPerc] = useState(0);
+  const [income, setIncome] = useState([]);
+  const [incomePerc, setIncomePerc] = useState(0);
+  console.log("🚀 ~ file: Summary.jsx:17 ~ Summary ~ income", income);
+  console.log("🚀 ~ file: Summary.jsx:19 ~ Summary ~ incomePerc", incomePerc);
 
   function compare(a, b) {
     if (a._id < b._id) {
@@ -22,6 +27,8 @@ const Summary = () => {
     }
     return 0;
   }
+
+  //Fetching Users
   useEffect(() => {
     async function fetchData() {
       try {
@@ -33,6 +40,39 @@ const Summary = () => {
         );
         setUsers(res.data);
         setUsersPerc(
+          ((res.data[0].total - res.data[1].total) / res.data[1].total) * 100
+        );
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchData();
+  }, []);
+
+  //Fetching Orders
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await axios.get(`${url}/orders/stats`, setHeaders());
+        res.data.sort(compare);
+        setOrders(res.data);
+        setOrdersPerc(
+          ((res.data[0].total - res.data[1].total) / res.data[1].total) * 100
+        );
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchData();
+  }, []);
+  //Fetching Incomes
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await axios.get(`${url}/orders/income/stats`, setHeaders());
+        res.data.sort(compare);
+        setIncome(res.data);
+        setIncomePerc(
           ((res.data[0].total - res.data[1].total) / res.data[1].total) * 100
         );
       } catch (error) {
@@ -54,21 +94,21 @@ const Summary = () => {
     },
     {
       Icon: <PieChartOutlined />,
-      digits: 70,
+      digits: orders[0]?.total,
       isMoney: false,
       title: "Órdenes",
       color: theme.palette.secondary.dark,
       bgcolor: theme.palette.secondary.light,
-      percentage: -20,
+      percentage: ordersPerc,
     },
     {
       Icon: <MoneyOutlined />,
-      digits: 500000,
+      digits: income[0]?.total,
       isMoney: true,
       title: "Ganancias",
       color: theme.palette.success.dark,
       bgcolor: theme.palette.success.light,
-      percentage: 60,
+      percentage: incomePerc,
     },
   ];
 
