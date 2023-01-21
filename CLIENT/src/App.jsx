@@ -1,3 +1,4 @@
+import ProductList from "../src/components/list/ProductList";
 import "./App.css";
 import CheckoutSuccess from "./components/CheckoutSuccess";
 import { PlanetProvider } from "./context/PlanetContext";
@@ -7,7 +8,6 @@ import Pagamento from "./pages/GuestPayment";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Product from "./pages/Product";
-import ProductList from "./pages/ProductList";
 import Register from "./pages/Register";
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -17,11 +17,11 @@ import "react-toastify/dist/ReactToastify.css";
 import CreateProduct from "./components/CreateProduct";
 import Dashboard from "./components/Dashboard";
 
+import Orders from "./components/admin/Orders";
+import Summary from "./components/admin/Summary";
+import Users from "./components/admin/Users";
 import NotFound from "./components/NotFound";
-import Orders from "./components/Orders";
 import ProductsTable from "./components/ProductsTable";
-import Summary from "./components/Summary";
-import Users from "./components/Users";
 
 import SubCategoriesList from "./pages/SubCategoriesList";
 
@@ -42,10 +42,11 @@ const App = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/admin" element={<Dashboard />}>
-            <Route path="summary" element={<Summary />} />
             <Route path="products" element={<ProductsTable />}>
+              <Route index element={<ProductList />} />
               <Route path="create-product" element={<CreateProduct />} />
             </Route>
+            <Route path="summary" element={<Summary />} />
             <Route path="users" element={<Users />} />
             <Route path="orders" element={<Orders />} />
           </Route>

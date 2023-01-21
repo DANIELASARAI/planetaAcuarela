@@ -3,12 +3,12 @@ import { useTheme } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import User from "../icons/User";
-import { setHeaders, url } from "../slices/api";
-import AllTimeData from "./summaryComponents/AllTimeData";
-import Chart from "./summaryComponents/Chart";
-import Transactions from "./summaryComponents/Transactions";
-import Widget from "./summaryComponents/Widget";
+import User from "../../icons/User";
+import { setHeaders, url } from "../../slices/api";
+import AllTimeData from "../summaryComponents/AllTimeData";
+import Chart from "../summaryComponents/Chart";
+import Transactions from "../summaryComponents/Transactions";
+import Widget from "../summaryComponents/Widget";
 const Summary = () => {
   const theme = useTheme();
 
