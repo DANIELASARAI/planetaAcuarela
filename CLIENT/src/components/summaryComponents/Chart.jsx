@@ -100,7 +100,7 @@ const Chart = () => {
 export default Chart;
 
 const StyledChart = styled.div`
-  width: 90%;
+  width: 100%;
   height: 300px;
   margin-top: 2rem;
  

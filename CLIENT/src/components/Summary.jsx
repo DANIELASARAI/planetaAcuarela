@@ -6,6 +6,7 @@ import styled from "styled-components";
 import User from "../icons/User";
 import { setHeaders, url } from "../slices/api";
 import Chart from "./summaryComponents/Chart";
+import Transactions from "./summaryComponents/Transactions";
 import Widget from "./summaryComponents/Widget";
 const Summary = () => {
   const theme = useTheme();
@@ -114,9 +115,9 @@ const Summary = () => {
   ];
 
   const StyledSummary = styled.div`
-    width: 100%;
+    width: 55%;
     display: flex;
-    padding-left: 6rem;
+    padding-left: 2rem;
     padding-top: 2rem;
   `;
 
@@ -126,7 +127,7 @@ const Summary = () => {
   `;
 
   const Title = styled.div`
-    font-size: 20px;
+    font-size: 15px;
 
     p {
       font-family: Yomogi;
@@ -145,15 +146,15 @@ const Summary = () => {
     color: ${({ color }) => color};
     background: ${({ bgcolor }) => bgcolor};
     border-radius: 3px;
-    font-size: 20px;
+    font-size: 10px;
   `;
 
   const SideStats = styled.div`
     flex: 1;
     display: flex;
     flex-direction: column;
-    margin-left: 2rem;
-    width: 100%;
+    margin-left: 3.5rem;
+    width: 80%;
   `;
   const Overview = styled.div`
     color: rgba(234, 234, 255, 0.87);
@@ -183,7 +184,9 @@ const Summary = () => {
         </Overview>
         <Chart />
       </MainStats>
-      <SideStats></SideStats>
+      <SideStats>
+        <Transactions />
+      </SideStats>
     </StyledSummary>
   );
 };

@@ -6,8 +6,8 @@ export const Children = styled.div`
   width: 100%;
   height: 100%;
   margin-left: ${({ displaySidebar }) => (displaySidebar ? "15rem" : "5rem")};
-  @media (max-width: 468px) {
-    margin-left: 5rem;
+  @media (max-width: 700px) {
+    margin-left: 2rem;
   }
 `;
 
@@ -55,6 +55,7 @@ export const SidebarToggler = styled.button`
 // SidebarItem styles
 export const ItemsList = styled.ul`
   list-style: none;
+  padding: 1rem 0.5rem;
 `;
 
 export const ItemContainer = styled.li`
@@ -74,7 +75,7 @@ export const ItemContainer = styled.li`
 
 export const ItemWrapper = styled.div`
   display: flex;
-  align-items: center;
+
   color: #7c7788;
 `;
 
@@ -87,14 +88,12 @@ export const ItemName = styled.span`
 // Sidebar Container
 export const SidebarContainer = styled.div`
   position: absolute;
-  left: 0;
-
-  width: ${({ displaySidebar }) => (displaySidebar ? "15rem" : "5rem")};
+  width: ${({ displaySidebar }) => (displaySidebar ? "2rem" : "2rem")};
   height: 100vh;
   position: fixed;
   top: 0;
   left: 0;
-  padding: 0.75rem;
+  padding: 0.5rem;
   background: #f3f4f4;
   transition: width 350ms ease;
   border-right: 1px solid #d4d8dd;
@@ -107,8 +106,8 @@ export const SidebarContainer = styled.div`
   &:hover {
     ${({ displaySidebar }) =>
       !displaySidebar && "box-shadow: 8px 0px 12px 0px rgba(0,0,0,0.1)"};
-    @media (min-width: 468px) {
-      width: ${({ displaySidebar }) => !displaySidebar && "15rem"};
+    @media (min-width: 390px) {
+      width: ${({ displaySidebar }) => !displaySidebar && "12rem"};
       ${SidebarLogoWrapper} {
         justify-content: ${({ displaySidebar }) =>
           !displaySidebar && "space-between"};
