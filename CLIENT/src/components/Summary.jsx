@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import User from "../icons/User";
 import { setHeaders, url } from "../slices/api";
+import Chart from "./summaryComponents/Chart";
 import Widget from "./summaryComponents/Widget";
 const Summary = () => {
   const theme = useTheme();
@@ -103,7 +104,7 @@ const Summary = () => {
     },
     {
       Icon: <MoneyOutlined />,
-      digits: income[0]?.total,
+      digits: income[0]?.total ? income[0]?.total : "0",
       isMoney: true,
       title: "Ganancias",
       color: theme.palette.success.dark,
@@ -180,6 +181,7 @@ const Summary = () => {
             ))}
           </WidgetWrapper>
         </Overview>
+        <Chart />
       </MainStats>
       <SideStats></SideStats>
     </StyledSummary>
