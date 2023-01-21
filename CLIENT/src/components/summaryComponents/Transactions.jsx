@@ -4,7 +4,7 @@ import localization from "moment/locale/es";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { setHeaders, url } from "../../slices/api";
-import { Small, Tiny } from "../Typography";
+import { Tiny } from "../Typography";
 
 moment.updateLocale("es", localization);
 
@@ -27,26 +27,28 @@ const Transactions = () => {
     fetchData();
   }, []);
 
-  const flattened = orders.flatMap((num) => num);
-  console.log(
-    "🚀 ~ file: Transactions.jsx:34 ~ Transactions ~ flattened",
-    flattened
-  );
   return (
     <StyledTransactions>
       {isLoading ? (
         <p>Cargando transacciones...</p>
       ) : (
         <>
-          <Small>Últimas transacciones</Small>
+          <Title> ⏳ Últimas transacciones</Title>
           {orders?.map((order, index) => (
             <Transaction key={index}>
               <Text>
                 <Tiny>{order.shipping.name}</Tiny>
+              </Text>
+              <Text>
+                {" "}
                 <Tiny> CLP {order.total}</Tiny>
               </Text>
               <Text>
-                <Tiny>{moment(order.createdAt).fromNow()}</Tiny>
+                {" "}
+                <Tiny>
+                  {" "}
+                  <Tiny>{moment(order.createdAt).fromNow()}</Tiny>
+                </Tiny>
               </Text>
             </Transaction>
           ))}
@@ -67,8 +69,7 @@ width: 80%;
 }`;
 const Text = styled.div` 
 margin-rigth: 0.5rem;
-margin-left: 0.5rem;
-
+margin-left: 1rem;
 }`;
 
 const Transaction = styled.div`
@@ -84,4 +85,9 @@ const Transaction = styled.div`
   &:nth-child(even) {
     background: rgba(102, 108, 255, 0.12);
   }
+`;
+
+const Title = styled.div`
+  flex: 1;
+  font-size: 15px;
 `;

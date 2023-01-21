@@ -257,3 +257,26 @@ export const Tiny = ({
     </StyledBox>
   );
 };
+export const XSTiny = ({
+  children,
+  className,
+  ellipsis,
+  textTransform,
+  ...props
+}) => {
+  return (
+    <StyledBox
+      textTransformStyle={textTransform}
+      ellipsis={ellipsis}
+      className={clsx({
+        [className || ""]: true,
+      })}
+      component="small"
+      fontSize="8px"
+      lineHeight="1.5"
+      {...props}
+    >
+      {children}
+    </StyledBox>
+  );
+};

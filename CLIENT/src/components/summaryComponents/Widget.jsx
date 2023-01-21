@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { H6 } from "../Typography";
+import { H3 } from "../Typography";
 const Widget = ({ data }) => {
   return (
     <StyledWidget>
@@ -8,11 +8,11 @@ const Widget = ({ data }) => {
         {data.Icon}
       </Icon>
       <Text>
-        <H6>
+        <H3>
           {data.isMoney
             ? "CLP " + data.digits?.toLocaleString()
             : data.digits?.toLocaleString()}
-        </H6>
+        </H3>
         <p>{data.title}</p>
       </Text>
       {data.percentage < 0 ? (
@@ -45,23 +45,24 @@ const Icon = styled.div`
   color: ${({ color }) => color};
   background: ${({ bgcolor }) => bgcolor};
   border-radius: 3px;
-  font-size: 5px;
+  font-size: 12px;
 `;
 
 const Text = styled.div`
   padding-left: 0.5rem;
   h3 {
     font-weight: 900;
+    font-size: 20px;
   }
   p {
-    font-size: 10px;
+    font-size: 15px;
     color: rgba(234, 234, 255, 0.68);
   }
 `;
 
 const Percentage = styled.div`
   margin-left: 0.5rem;
-  font-size: 12px;
+  font-size: 18px;
   color: ${({ isPositive }) =>
     isPositive ? "rgb(115, 250, 40)" : "rgb(255, 77, 73)"};
 `;

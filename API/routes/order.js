@@ -67,7 +67,6 @@ router.get("/", isAdmin, async (req, res) => {
       : await Order.find().sort({ _id: -1 });
     res.status(200).send(orders);
   } catch (err) {
-    console.log("🚀 ~ file: order.js:69 ~ router.get ~ err", err);
     res.status(500).send(err);
   }
 });
@@ -97,6 +96,30 @@ router.get("/income/stats", isAdmin, async (req, res) => {
       },
     ]);
     res.status(200).json(income);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+// GET TOTAL INCOME
+
+router.get("/income", async (req, res) => {
+  try {
+    const income = await Order.aggregate([
+      {
+        $project: {
+          sales: "$total",
+        },
+      },
+      {
+        $group: {
+          _id: null,
+          total: { $sum: "$sales" },
+        },
+      },
+    ]);
+
+    res.status(200).json(income);
+    console.log("🚀 ~ file: order.js:119 ~ router.get ~ income", income);
   } catch (err) {
     res.status(500).json(err);
   }

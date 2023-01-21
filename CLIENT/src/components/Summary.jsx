@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import User from "../icons/User";
 import { setHeaders, url } from "../slices/api";
+import AllTimeData from "./summaryComponents/AllTimeData";
 import Chart from "./summaryComponents/Chart";
 import Transactions from "./summaryComponents/Transactions";
 import Widget from "./summaryComponents/Widget";
@@ -36,10 +37,7 @@ const Summary = () => {
       try {
         const res = await axios.get(`${url}/users/stats`, setHeaders());
         res.data.sort(compare);
-        console.log(
-          "🚀 ~ file: Summary.jsx:23 ~ fetchData ~ response data",
-          res.data
-        );
+
         setUsers(res.data);
         setUsersPerc(
           ((res.data[0].total - res.data[1].total) / res.data[1].total) * 100
@@ -115,9 +113,9 @@ const Summary = () => {
   ];
 
   const StyledSummary = styled.div`
-    width: 55%;
+    width: 80%;
     display: flex;
-    padding-left: 2rem;
+    margin-left: 5rem;
     padding-top: 2rem;
   `;
 
@@ -127,11 +125,11 @@ const Summary = () => {
   `;
 
   const Title = styled.div`
-    font-size: 15px;
+    font-size: 22px;
 
     p {
       font-family: Yomogi;
-      font-size: 12px;
+      font-size: 20px;
       color: rgba(234, 234, 255, 0.68);
     }
   `;
@@ -153,8 +151,8 @@ const Summary = () => {
     flex: 1;
     display: flex;
     flex-direction: column;
-    margin-left: 3.5rem;
-    width: 80%;
+    margin-left: 5rem;
+    width: 100%;
   `;
   const Overview = styled.div`
     color: rgba(234, 234, 255, 0.87);
@@ -186,6 +184,7 @@ const Summary = () => {
       </MainStats>
       <SideStats>
         <Transactions />
+        <AllTimeData />
       </SideStats>
     </StyledSummary>
   );
