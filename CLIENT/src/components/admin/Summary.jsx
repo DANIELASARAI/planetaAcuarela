@@ -4,6 +4,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import User from "../../icons/User";
+import { mobile } from "../../responsive";
 import { setHeaders, url } from "../../slices/api";
 import AllTimeData from "../summaryComponents/AllTimeData";
 import Chart from "../summaryComponents/Chart";
@@ -113,15 +114,27 @@ const Summary = () => {
   ];
 
   const StyledSummary = styled.div`
-    width: 80%;
+    width: 60%;
     display: flex;
-    margin-left: 5rem;
     padding-top: 2rem;
+    ${mobile({
+      flexDirection: "column",
+
+      justifyContent: "space-between",
+      width: "60%",
+      marginTop: "20px",
+      marginRight: "25px",
+      marginLeft: "5px",
+    })};
   `;
 
   const MainStats = styled.div`
     flex: 2;
     width: 100%;
+    ${mobile({
+      marginRight: "20px",
+      width: "100%",
+    })};
   `;
 
   const Title = styled.div`
@@ -137,6 +150,10 @@ const Summary = () => {
     display: flex;
     width: 100%;
     justify-content: space-between;
+    ${mobile({
+      flexDirection: "column",
+      height: "600px",
+    })};
   `;
   const Icon = styled.div`
     margin-right: 0.5 rem;
@@ -153,6 +170,13 @@ const Summary = () => {
     flex-direction: column;
     margin-left: 5rem;
     width: 100%;
+    ${mobile({
+      flex: 2,
+      marginTop: "20px",
+      marginLeft: "15px",
+
+      width: "300px",
+    })};
   `;
   const Overview = styled.div`
     color: rgba(234, 234, 255, 0.87);
@@ -164,6 +188,11 @@ const Summary = () => {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    ${mobile({
+      height: "350px",
+      width: "250px",
+      marginLeft: "20px",
+    })};
   `;
 
   return (

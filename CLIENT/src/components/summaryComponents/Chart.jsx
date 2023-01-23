@@ -11,6 +11,7 @@ import {
   YAxis,
 } from "recharts";
 import styled from "styled-components";
+import { mobile } from "../../responsive";
 import { setHeaders, url } from "../../slices/api";
 
 const Chart = () => {
@@ -114,6 +115,9 @@ const StyledChart = styled.div`
     font-size: 12px;
     color:rgba(48, 51, 78, 1);
   }
+  ${mobile({
+    display: "none",
+  })};
 `;
 
 const Loader = styled.p`

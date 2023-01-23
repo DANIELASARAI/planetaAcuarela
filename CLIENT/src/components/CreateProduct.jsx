@@ -368,7 +368,7 @@ const ImagePreview = styled.div`
   ${mobile({ width: "1%", height: "15vh", margin: "0  2rem 0 0 " })};
   display: flex;
   align-items: center;
-  padding: 10rem;
+  padding: 2rem;
   justify-content: center;
 
   color: rgb(78, 78, 78);

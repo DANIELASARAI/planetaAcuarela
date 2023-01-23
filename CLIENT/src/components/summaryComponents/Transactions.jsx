@@ -3,6 +3,7 @@ import moment from "moment";
 import localization from "moment/locale/es";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import { mobile } from "../../responsive";
 import { setHeaders, url } from "../../slices/api";
 import { Tiny } from "../Typography";
 
@@ -66,10 +67,16 @@ color: rgba(234, 234,255, 0.87);
 padding: 2rem;
 border-radius: 5px;
 width: 80%;
+
 }`;
 const Text = styled.div` 
-margin-rigth: 0.5rem;
+margin-right: 0.5rem;
 margin-left: 1rem;
+${mobile({
+  justifyContent: "center",
+  fontSize: "5px",
+})};
+
 }`;
 
 const Transaction = styled.div`
@@ -79,8 +86,9 @@ const Transaction = styled.div`
   padding: 0.5rem;
   border-radius: 3px;
   background: rgba(38, 198, 249, 0.12);
+
   p {
-    flex: 1;
+    flex: 2;
   }
   &:nth-child(even) {
     background: rgba(102, 108, 255, 0.12);

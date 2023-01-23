@@ -3,7 +3,23 @@ import styled from "styled-components";
 export const AdminHeaders = styled.div`
   display: flex;
   justify-content: space-between;
-  font-family: Yomogi;
+  margin-bottom: 20px;
+`;
+export const AdminProductsContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const Title = styled.div`
+  font-size: 22px;
+
+  p {
+    font-family: Yomogi;
+    font-size: 20px;
+    color: rgba(234, 234, 255, 0.68);
+  }
 `;
 
 export const H1 = styled.h1`
