@@ -40,3 +40,23 @@
     border-radius: 50%;
     background-color: #fff;
   }
+
+  .product button,
+  .product-add-to-cart{
+    width: 100%;
+    height: 40px;
+    border-radius:5px;
+    margin-top: 2rem;
+    font-weight: 400;
+    letter-spacing: 1.15px;
+    background-color: #b279a8;
+    border: none;
+    outline: none;
+    cursor: pointer; 
+  }
+
+  .product-add-to-cart{
+    width: auto;
+    padding: 0 2rem;
+    margin-top: 0;
+  }

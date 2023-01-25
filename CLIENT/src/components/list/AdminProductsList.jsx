@@ -1,9 +1,13 @@
 import { DataGrid } from "@mui/x-data-grid";
-import * as React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { productsDelete } from "../../redux/productsRedux";
+import EditProduct from "../admin/EditProduct";
 
 export default function AdminProductsList() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { items } = useSelector((state) => state.products);
 
   const rows = items?.map((item) => {
@@ -41,24 +45,32 @@ export default function AdminProductsList() {
       field: "price",
       headerName: "Precio",
 
-      width: 120,
+      width: 90,
     },
     {
       field: "actions",
       headerName: "Acciones",
       description: "This column has a value getter and is not sortable.",
       sortable: false,
-      width: 150,
+      width: 180,
       renderCell: (params) => {
         return (
           <Actions>
-            <Delete>Borrar</Delete>
-            <View>Ver</View>
+            <Delete onClick={() => handleDelete(params.row.id)}>Borrar</Delete>
+            <EditProduct prodId={params.row.id} />
+            <View onClick={() => navigate(`/producto/${params.row.id}`)}>
+              Ver
+            </View>
           </Actions>
         );
       },
     },
   ];
+
+  const handleDelete = (id) => {
+    dispatch(productsDelete(id));
+  };
+
   return (
     <>
       <div style={{ height: 600, width: 1200 }}>
@@ -68,6 +80,7 @@ export default function AdminProductsList() {
           pageSize={10}
           rowsPerPageOptions={[10]}
           checkboxSelection
+          disableSelectionOnClick
         />
       </div>
     </>

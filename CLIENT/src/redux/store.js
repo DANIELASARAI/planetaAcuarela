@@ -1,7 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import cartReducer from "./cartRedux";
 import authReducer from "./authRedux";
+import cartReducer from "./cartRedux";
+import ordersReducer from "./ordersRedux";
 import productsReducer from "./productsRedux";
 
 export default configureStore({
@@ -9,5 +10,6 @@ export default configureStore({
     products: productsReducer,
     cart: cartReducer,
     auth: authReducer,
+    orders: ordersReducer,
   },
 });
