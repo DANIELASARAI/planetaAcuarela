@@ -106,7 +106,7 @@ const productsReducer = createSlice({
     },
     [productsEdit.fulfilled]: (state, action) => {
       const updatedProducts = state.items?.map((product) =>
-        product._id === action.payload.Id ? action.payload : product
+        product._id === action.payload._id ? action.payload : product
       );
       state.items = updatedProducts;
       state.editStatus = "success";

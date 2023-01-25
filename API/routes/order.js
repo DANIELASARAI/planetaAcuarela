@@ -22,8 +22,8 @@ router.post("/", verifyToken, async (req, res) => {
   }
 });
 
-//UPDATE
-router.put("/:id", verifyTokenAdmin, async (req, res) => {
+//UPDATE ORDER
+router.put("/:id", isAdmin, async (req, res) => {
   try {
     const updatedOrder = await Order.findByIdAndUpdate(
       req.params.id,
@@ -32,14 +32,25 @@ router.put("/:id", verifyTokenAdmin, async (req, res) => {
       },
       { new: true }
     );
-    res.status(200).json(updatedOrder);
+    res.status(200).send(updatedOrder);
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).send(err);
   }
 });
 
+//GET AN ORDER
+router.get("/findOne/:id", auth, async (req, res) => {
+  try {
+    const order = await Order.findById(req.params.id);
+    if (req.user._id !== order.userId || !req.user.isAdmin)
+      return res.status(403).send("Acceso denegado. Sin autorización...");
+    res.status(200).send(order);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
 //DELETE
-router.delete("/:id", verifyTokenAdmin, async (req, res) => {
+router.delete("/:id", isAdmin, async (req, res) => {
   try {
     await Order.findByIdAndDelete(req.params.id);
     res.status(200).json("Order has been deleted...");
@@ -49,7 +60,7 @@ router.delete("/:id", verifyTokenAdmin, async (req, res) => {
 });
 
 //GET USER ORDERS
-router.get("/find/:userId", verifyTokenAuthorization, async (req, res) => {
+router.get("/find/:userId", isAdmin, async (req, res) => {
   try {
     const orders = await Order.find({ userId: req.params.userId });
     res.status(200).json(orders);

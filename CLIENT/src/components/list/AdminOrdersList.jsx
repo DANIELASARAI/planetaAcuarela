@@ -5,8 +5,7 @@ import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { ordersFetch } from "../../redux/ordersRedux";
-import { productsDelete } from "../../redux/productsRedux";
+import { ordersEdit, ordersFetch } from "../../redux/ordersRedux";
 
 export default function AdminOrdersList() {
   const navigate = useNavigate();
@@ -75,17 +74,24 @@ export default function AdminOrdersList() {
       renderCell: (params) => {
         return (
           <Actions>
-            <DispatchBtn>Despachar</DispatchBtn>
-            <DeliverBtn>Enviar</DeliverBtn>
-            <View>Detalles</View>
+            <DispatchBtn onClick={() => handleOrderDispatch(params.row.id)}>
+              Despachar
+            </DispatchBtn>
+            <DeliveredBtn onClick={() => handleOrderDelivered(params.row.id)}>
+              Enviar
+            </DeliveredBtn>
+            <View onClick={() => navigate(`/order/${params.row.id}`)}>Ver</View>
           </Actions>
         );
       },
     },
   ];
 
-  const handleDelete = (id) => {
-    dispatch(productsDelete(id));
+  const handleOrderDispatch = (id) => {
+    dispatch(ordersEdit({ id, delivery_status: "dispatched" }));
+  };
+  const handleOrderDelivered = (id) => {
+    dispatch(ordersEdit({ id, delivery_status: "delivered" }));
   };
 
   return (
@@ -107,7 +113,7 @@ export default function AdminOrdersList() {
 const DispatchBtn = styled.button`
   background-color: rgb(38, 198, 249);
 `;
-const DeliverBtn = styled.button`
+const DeliveredBtn = styled.button`
   background-color: rgb(102, 108, 255);
 `;
 const View = styled.button`
@@ -117,7 +123,7 @@ const Pending = styled.button`
   color: rgb(253, 181, 40);
   background-color: rgb(253, 181, 40, 0.12);
   padding: 3px 5px;
-  border-radius: 3px;
+  border-radius: 12px;
   border: none;
   font-size: 14px;
 `;
@@ -125,14 +131,16 @@ const Dispatched = styled.button`
   color: rgb(38, 198, 249);
   background-color: rgb(38, 198, 249, 0.12);
   padding: 3px 5px;
-  border-radius: 3px;
+  border-radius: 12px;
+  border: none;
   font-size: 14px;
 `;
 const Delivered = styled.button`
   color: rgb(102, 108, 255);
   background-color: rgb(102, 108, 255, 0.12);
   padding: 3px 5px;
-  border-radius: 3px;
+  border-radius: 12px;
+  border: none;
   font-size: 14px;
 `;
 
@@ -143,9 +151,9 @@ const Actions = styled.div`
   button {
     border: none;
     outline: none;
-    padding: 3px 5px;
+    padding: 5px 8px;
     color: white;
-    border-radius: 3px;
+    border-radius: 12px;
     cursor: pointer;
   }
 `;

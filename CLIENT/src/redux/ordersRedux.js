@@ -21,14 +21,21 @@ export const ordersFetch = createAsyncThunk("orders/ordersFetch", async () => {
 
 export const ordersEdit = createAsyncThunk(
   "orders/ordersEdit",
-  async (values) => {
+  async (values, { getState }) => {
+    const state = getState();
+    let currentOrder = state.orders.list.filter(
+      (order) => order._id === values.id
+    );
+    const newOrder = {
+      ...currentOrder[0],
+      delivery_status: values.delivery_status,
+    };
     try {
       const response = await axios.put(
-        `${url}/products/${values.product._id}`,
-        values,
+        `${url}/orders/${values.id}`,
+        newOrder,
         setHeaders()
       );
-      console.log(response.data);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -57,12 +64,12 @@ const ordersReducer = createSlice({
       state.editStatus = "pending";
     },
     [ordersEdit.fulfilled]: (state, action) => {
-      const updatedProducts = state.list?.map((product) =>
-        product._id === action.payload.Id ? action.payload : product
+      const updatedOrders = state.list?.map((order) =>
+        order._id === action.payload._id ? action.payload : order
       );
-      state.items = updatedProducts;
+      state.items = updatedOrders;
       state.editStatus = "success";
-      toast.info("Producto actualizado!");
+      toast.info("Orden actualizada!");
     },
     [ordersEdit.rejected]: (state, action) => {
       state.editStatus = "rejected";
