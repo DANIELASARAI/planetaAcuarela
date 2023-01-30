@@ -60,28 +60,70 @@ router.post("/", isAdmin, async (req, res) => {
 });
 
 //UPDATE
-router.put("/:id", verifyTokenAdmin, async (req, res) => {
-  try {
-    const updatedProduct = await Product.findByIdAndUpdate(
-      req.params.id,
-      {
-        $set: req.body,
-      },
-      { new: true }
-    );
-    res.status(200).json(updatedProduct);
-  } catch (err) {
-    res.status(500).json(err);
+router.put("/:id", isAdmin, async (req, res) => {
+  if (req.body.productImg) {
+    try {
+      const destroyResponse = await cloudinary.uploader.destroy(
+        req.body.product.image.public_id
+      );
+      if (destroyResponse) {
+        const uploadedResponse = await cloudinary.uploader.upload(
+          req.body.productImg,
+          {
+            upload_preset: "acuarela",
+          }
+        );
+        if (uploadedResponse) {
+          const updatedProduct = await Product.findByIdAndUpdate(
+            req.params.id,
+
+            {
+              $set: { ...req.body.product, image: uploadedResponse },
+            },
+            { new: true }
+          );
+          res.status(200).send(updatedProduct);
+        }
+      }
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  } else {
+    try {
+      const updatedProduct = await Product.findByIdAndUpdate(
+        req.params.id,
+        {
+          $set: req.body.product,
+        },
+        { new: true }
+      );
+      res.status(200).send(updatedProduct);
+    } catch (err) {
+      res.status(500).send(err);
+    }
   }
 });
 
 //DELETE
-router.delete("/:id", verifyTokenAdmin, async (req, res) => {
+router.delete("/:id", isAdmin, async (req, res) => {
   try {
-    await Product.findByIdAndDelete(req.params.id);
-    res.status(200).json("Product has been deleted...");
+    const product = await Product.findByIdAndDelete(req.params.id);
+    if (!product) return res.status(404).send("Producto no encontrado...");
+    if (product.image.public_id) {
+      const destroyResponse = await cloudinary.uploader.destroy(
+        product.image.public_id
+      );
+      if (destroyResponse) {
+        const deletedProduct = await Product.findByIdAndDelete(req.params.id);
+        res.status(200).send(deletedProduct);
+      }
+    } else {
+      console.log(
+        "Acción terminada, falla al borrar la imagen del producto..."
+      );
+    }
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).send(err);
   }
 });
 
@@ -89,10 +131,10 @@ router.delete("/:id", verifyTokenAdmin, async (req, res) => {
 router.get("/find/:id", async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
-    res.status(200).json(product);
+    res.status(200).send(product);
   } catch (err) {
     console.log(err.message);
-    res.status(500).json(err);
+    res.status(500).send(err);
   }
 });
 

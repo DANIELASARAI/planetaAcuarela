@@ -1,5 +1,5 @@
 import { SvgIcon } from "@mui/material";
-import React from "react";
+
 const ShoppingCart = (props) => {
   return (
     <SvgIcon viewBox="0 0 24 24" {...props}>

@@ -1,22 +1,22 @@
 import React from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 //1.8a npm install @mui/icons-material @mui/material @emotion/styled @emotion/react and import it
-import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined"; //can add inner style, fontSize and color
 //1.13.1
 import ShoppingCartTwoToneIcon from "@mui/icons-material/ShoppingCartTwoTone";
 //1) We are gonna use styled components, instead of div, we use our Container to use our style component, npm i styled-components
-import styled from "styled-components";
-import { Badge, Button, ListItemButton } from "@mui/material";
-import { mobile } from "../responsive";
-import { logoutUser } from "../redux/authRedux";
-import { toast } from "react-toastify";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
-import LogoutIcon from "@mui/icons-material/Logout";
-import LoginIcon from "@mui/icons-material/Login";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
+import LoginIcon from "@mui/icons-material/Login";
+import LogoutIcon from "@mui/icons-material/Logout";
+import { Badge, Button } from "@mui/material";
+import { toast } from "react-toastify";
+import styled from "styled-components";
+import { logoutUser } from "../redux/authRedux";
+import { mobile } from "../responsive";
 
 import logo from "../img/acuarela.png";
+import PlanetPopover from "./PlanetPopover";
 
 //1.1 We could use div className container and create a css file .container class,
 //or we can use styled container like this Useful for larger applications.
@@ -75,7 +75,8 @@ const Right = styled.div`
   display: flex;
   align-items: center;
   //1.14
-  justify-content: flex-end;
+
+  justify-content: space-between;
   ${mobile({ flex: 3, justifyContent: "center" })};
 `;
 //1.13 Create the items for the right side, then insert into Right container,
@@ -113,11 +114,12 @@ const AdminItem = styled.div`
   cursor: pointer;
   display: flex;
   font-family: Poppins;
-  margin-left: 25px;
+  margin-right: 20px;
   color: #853b7d;
 
-  ${mobile({ fontSize: "12px", marginLeft: "10px" })};
+  ${mobile({ fontSize: "12px", marginLeft: "20px" })};
 `;
+
 //1.7 Language element, to then be displayed on Left parent
 const Language = styled.span`
   font-size: 12px;
@@ -141,6 +143,14 @@ const Input = styled.input`
   ${mobile({ width: "40px" })};
   border-radius: 15px;
 `;
+const PlanetItem = styled.div`
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+
+  font-family: Poppins;
+  color: #853b7d;
+`;
 
 const Navbar = () => {
   const { cartTotalQuantity } = useSelector((state) => state.cart);
@@ -162,7 +172,7 @@ const Navbar = () => {
             <img src={logo} width={80} />
           </StyledIconButton>
         </Left>
-        <Center></Center>
+        <Center> </Center>
         <Right>
           {auth._id ? (
             <Right admin={adminPath}>
@@ -171,6 +181,9 @@ const Navbar = () => {
                   <AdminPanelSettingsIcon />
                 </AdminItem>
               ) : null}
+              <PlanetItem>
+                <PlanetPopover />
+              </PlanetItem>
               <MenuItem
                 onClick={() => {
                   dispatch(logoutUser(null));

@@ -1,31 +1,23 @@
-import React from "react";
-import styled from "styled-components";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { PrimaryButton } from "./CommonStyled";
-import { productsCreate } from "../redux/productsRedux";
-import { cat } from "../data";
-import { sizes } from "../data";
-import { genders } from "../data";
-import { subCats } from "../data";
-import { colors } from "../data";
-import { useTheme } from "@mui/material/styles";
+import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import {
   Box,
   Fab,
   FormControl,
   InputLabel,
   MenuItem,
-  OutlinedInput,
   Select,
   TextField,
   ThemeProvider,
 } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
-import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import styled from "styled-components";
+import { cat, colors, genders, sizes, subCats } from "../data";
+import Picture from "../img/createProduct.png";
+import { productsCreate } from "../redux/productsRedux";
+import { mobile } from "../responsive";
 import { H4 } from "./Typography";
-
 const theme = createTheme({
   status: {
     danger: "#d32f2f",
@@ -58,7 +50,6 @@ const CreateProduct = () => {
   const [size, setSize] = useState([]);
   const [color, setColor] = useState([]);
   const [inStock, setInStock] = useState(true);
-  console.log(createStatus);
 
   const handleProductImageUpload = (e) => {
     const file = e.target.files[0];
@@ -125,8 +116,7 @@ const CreateProduct = () => {
         <ThemeProvider theme={theme}>
           <Box
             sx={{
-              width: 100,
-
+              width: 300,
               padding: 1,
               display: "flex",
             }}
@@ -321,6 +311,10 @@ const CreateProduct = () => {
           <p>Previsualización de Imagen</p>
         )}
       </ImagePreview>
+      <CreatePicture>
+        {" "}
+        <img src={Picture} width={600} />
+      </CreatePicture>
     </StyledCreateProduct>
   );
 };
@@ -333,44 +327,59 @@ const StyledForm = styled.form`
   max-width: 300px;
   margin-top: 1rem;
   margin-bottom: 1rem;
+  margin-left: 6rem;
   select,
   input {
-    padding: 10px;
-    min-height: 20px;
+    padding: 7px;
+    min-height: 30px;
     outline: none;
     border-radius: 5px;
   }
   select {
     color: rgb(95, 95, 95);
   }
+  ${mobile({ margin: "1rem 0.5rem 1rem" })}
 `;
 
 const StyledCreateProduct = styled.div`
   display: flex;
   justify-content: space-between;
+  ${mobile({ flexDirection: "column" })}
 `;
+
 const CargarProducto = styled.button`
   cursor: pointer;
-  width: 100%;
-  color: primary;
-  border-radius: 10px;
-  margin-bottom: 1rem;
+  width: 90%;
+  padding: 1.5rem;
+  color: white;
+  border-radius: 20px;
+  margin-top: 1rem;
+  margin-left: 1rem;
   border: 1px solid rgb(183, 183, 183);
+  background-color: #b279a8;
 `;
 
 const ImagePreview = styled.div`
-  margin: 2rem 0 2rem 2rem;
+  margin: 6rem 14rem 6rem 4rem;
   border-radius: 10px;
-  padding: 2rem;
-  border: 1px solid rgb(183, 183, 183);
-  max-width: 300px;
   width: 100%;
+
+  border: 1px solid rgb(183, 183, 183);
+  ${mobile({ width: "1%", height: "15vh", margin: "0  2rem 0 0 " })};
   display: flex;
   align-items: center;
-  justify-content: center;
   padding: 2rem;
+  justify-content: center;
+
   color: rgb(78, 78, 78);
-  img {
-    max-width: 100%;
-  }
+`;
+const CreatePicture = styled.div`
+  ${mobile({ display: "none" })};
+  margin: 6rem 12rem 6rem 4rem;
+  border: "none";
+  max-width: 150px;
+  width: 100%;
+  display: flex;
+  align-items: end;
+  justify-content: end;
 `;
