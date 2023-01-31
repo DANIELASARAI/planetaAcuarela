@@ -2,32 +2,31 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import { setHeaders, url } from "../../redux/api";
+import { setHeaders, url } from "../../slices/api";
 
 const Order = () => {
   const params = useParams();
   const [order, setOrder] = useState({});
-  console.log("🚀 ~ file: Order.jsx:10 ~ Order ~ order", order);
 
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const fetchOrder = async () => {
+    setLoading(true);
+    async function fetchOrder() {
       try {
-        setLoading(true);
         const res = await axios.get(
           `${url}/orders/find/${params.id}`,
           setHeaders()
         );
 
         setOrder(res.data);
-        setLoading(false);
       } catch (error) {
         console.log(error);
       }
-    };
+      setLoading(false);
+    }
     fetchOrder();
-  }, [params.id]);
+  }, []);
 
   return (
     <StyledOrder>

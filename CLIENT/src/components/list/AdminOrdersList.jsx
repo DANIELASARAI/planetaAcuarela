@@ -3,7 +3,7 @@ import React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { ordersEdit, ordersFetch } from "../../redux/ordersRedux";
 
@@ -11,10 +11,6 @@ export default function AdminOrdersList() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { list } = useSelector((state) => state.orders);
-  console.log(
-    "🚀 ~ file: AdminOrdersList.jsx:15 ~ AdminOrdersList ~ list",
-    list
-  );
 
   React.useEffect(() => {
     dispatch(ordersFetch);
@@ -80,9 +76,7 @@ export default function AdminOrdersList() {
             <DeliveredBtn onClick={() => handleOrderDelivered(params.row.id)}>
               Enviar
             </DeliveredBtn>
-            <Link to={`/orden/${params.row.id}`}>
-              <View>Ver</View>
-            </Link>
+            <View onClick={() => navigate(`/orden/${params.row.id}`)}>Ver</View>
           </Actions>
         );
       },

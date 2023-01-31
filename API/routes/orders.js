@@ -39,7 +39,7 @@ router.put("/:id", isAdmin, async (req, res) => {
 });
 
 //GET AN ORDER
-router.get("/find/:id", isAdmin, async (req, res) => {
+router.get("/find/:id", async (req, res) => {
   try {
     const order = await Order.findById(req.params.id);
     if (req.user._id !== order.userId || !req.user.isAdmin)
