@@ -42,20 +42,21 @@ router.put("/:id", isAdmin, async (req, res) => {
 router.get("/find/:id", async (req, res) => {
   try {
     const order = await Order.findById(req.params.id);
-    if (req.user._id !== order.userId || !req.user.isAdmin)
-      return res.status(403).send("Acceso denegado. Sin autorización...");
+    console.log("🚀 ~ file: orders.js:45 ~ router.get ~ order", order);
     res.status(200).send(order);
   } catch (err) {
+    console.log(err.message);
     res.status(500).send(err);
   }
 });
+
 //DELETE
 router.delete("/:id", isAdmin, async (req, res) => {
   try {
     await Order.findByIdAndDelete(req.params.id);
-    res.status(200).json("Order has been deleted...");
+    res.status(200).send("Order has been deleted...");
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).send(err);
   }
 });
 

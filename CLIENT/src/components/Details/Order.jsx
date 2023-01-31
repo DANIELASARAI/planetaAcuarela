@@ -7,12 +7,13 @@ import { setHeaders, url } from "../../slices/api";
 const Order = () => {
   const params = useParams();
   const [order, setOrder] = useState({});
+  console.log("🚀 ~ file: Order.jsx:10 ~ Order ~ order", order);
 
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setLoading(true);
-    async function fetchOrder() {
+    async function fetchData() {
       try {
         const res = await axios.get(
           `${url}/orders/find/${params.id}`,
@@ -21,12 +22,12 @@ const Order = () => {
 
         setOrder(res.data);
       } catch (error) {
-        console.log(error);
+        console.log(error.message);
       }
       setLoading(false);
     }
-    fetchOrder();
-  }, []);
+    fetchData();
+  }, [params.id]);
 
   return (
     <StyledOrder>

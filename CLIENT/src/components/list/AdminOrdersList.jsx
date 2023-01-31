@@ -11,6 +11,10 @@ export default function AdminOrdersList() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { list } = useSelector((state) => state.orders);
+  console.log(
+    "🚀 ~ file: AdminOrdersList.jsx:14 ~ AdminOrdersList ~ list",
+    list
+  );
 
   React.useEffect(() => {
     dispatch(ordersFetch);
