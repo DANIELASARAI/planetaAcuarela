@@ -5,7 +5,7 @@ import { H6, Small, Tiny } from "./Typography";
 import { Fragment, useRef, useState } from "react";
 
 import { useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import PopoverLayout from "./PopoverLayout"; // styled components
 
 const StyledButtonBase = styled(ButtonBase)(({ theme }) => ({
@@ -34,6 +34,11 @@ const PlanetPopover = () => {
   const [productsByCat, setProductsByCat] = useState([]);
   /*   const { logout, user } = useAuth(); */
   const [open, setOpen] = useState(false);
+  const auth = useSelector((state) => state.auth);
+  console.log(
+    "🚀 ~ file: PlanetPopover.jsx:38 ~ PlanetPopover ~ auth",
+    auth.name
+  );
 
   const handleMenuItem = (path) => {
     navigate(path);
@@ -66,10 +71,18 @@ const PlanetPopover = () => {
         popoverClose={() => setOpen(false)}
         title={
           <Box>
-            <H6>{/* user?.name || */ "Ya estas registrado?"}</H6>
-            <Tiny display="block" fontWeight={500} color="text.disabled">
-              {/* user?.email || */ "Házlo y obten más descuentos."}
-            </Tiny>
+            {!auth._id ? (
+              <>
+                <Link to="/register">
+                  <H6>{"Ya estas registrado?"}</H6>
+                </Link>
+                <Tiny display="block" fontWeight={500} color="text.disabled">
+                  {"Házlo y obten más descuentos."}
+                </Tiny>
+              </>
+            ) : (
+              <H6>Hola 👋 {auth?.name}.</H6>
+            )}
           </Box>
         }
       >

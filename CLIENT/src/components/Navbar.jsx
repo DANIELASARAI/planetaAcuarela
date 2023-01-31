@@ -14,6 +14,7 @@ import { toast } from "react-toastify";
 import styled from "styled-components";
 import { logoutUser } from "../redux/authRedux";
 import { mobile } from "../responsive";
+import PlanetPopover from "./PlanetPopover";
 
 import logo from "../img/acuarela.png";
 
@@ -108,14 +109,12 @@ const MenuItem = styled.div`
 `;
 const AdminItem = styled.div`
   font-size: 12px;
-
   cursor: pointer;
   display: flex;
   font-family: Poppins;
-  margin-left: 25px;
+  margin-right: 20px;
   color: #853b7d;
-
-  ${mobile({ fontSize: "12px", marginLeft: "10px" })};
+  ${mobile({ fontSize: "12px", marginLeft: "20px" })};
 `;
 //1.7 Language element, to then be displayed on Left parent
 const Language = styled.span`
@@ -132,6 +131,14 @@ const SearchContainer = styled.div`
   align-items: center;
   margin-left: 25px;
   padding: 5px;
+`;
+
+const PlanetItem = styled.div`
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  font-family: Poppins;
+  color: #853b7d;
 `;
 
 //1.11 Input Container, inside the Search container
@@ -165,11 +172,18 @@ const Navbar = () => {
         <Right>
           {auth._id ? (
             <Right admin={adminPath}>
-              {auth.isAdmin ? (
-                <AdminItem onClick={() => navigate("/admin")}>
-                  <AdminPanelSettingsIcon />
-                </AdminItem>
-              ) : null}
+              <>
+                {auth.isAdmin ? (
+                  <>
+                    <AdminItem onClick={() => navigate("/admin")}>
+                      <AdminPanelSettingsIcon />
+                    </AdminItem>
+                  </>
+                ) : null}
+                <PlanetItem>
+                  <PlanetPopover />
+                </PlanetItem>
+              </>
               <MenuItem
                 onClick={() => {
                   dispatch(logoutUser(null));
@@ -181,6 +195,9 @@ const Navbar = () => {
             </Right>
           ) : (
             <>
+              <PlanetItem>
+                <PlanetPopover />
+              </PlanetItem>
               <Link to="/register">
                 <MenuItem>
                   <AppRegistrationIcon />

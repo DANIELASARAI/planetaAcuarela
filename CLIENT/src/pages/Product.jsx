@@ -134,12 +134,17 @@ const Button = styled.button`
     background-color: #f8f4f4;
   }
 `;
+const Loader = styled.p`
+  margin-top: 2rem;
+  font-family: Yomogi;
+`;
 
 const Product = () => {
   const location = useLocation();
   const id = location.pathname.split("/")[2];
   const [product, setProduct] = useState({});
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const [color, setColor] = useState([]);
   const [size, setSize] = useState([]);
@@ -147,13 +152,16 @@ const Product = () => {
   const [stock, setInStock] = useState("No");
   useEffect(() => {
     const getProduct = async () => {
+      setLoading(true);
       try {
         const res = await publicRequest.get("/products/find/" + id);
         setProduct(res.data);
         setInStock(res.data.inStock);
-
-        console.log(res.data);
-      } catch {}
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+        setLoading(false);
+      }
     };
     getProduct();
   }, [id]);
@@ -167,49 +175,59 @@ const Product = () => {
     <Container>
       <Navbar />
       <Announcement />
-      <Wrapper>
-        <ImgContainer>
-          <Image src={product.image?.url} />
-        </ImgContainer>
-        <InfoContainer>
-          <Title>{product.name}</Title>
+      <>
+        {loading ? (
+          <Loader>Cargando Detalles del producto...</Loader>
+        ) : (
+          <Wrapper>
+            <ImgContainer>
+              <Image src={product.image?.url} />
+            </ImgContainer>
+            <InfoContainer>
+              <Title>{product.name}</Title>
 
-          <Desc>{product.desc}</Desc>
-          <Price>{product.price} CLP</Price>
+              <Desc>{product.desc}</Desc>
+              <Price>{product.price} CLP</Price>
 
-          {stock === true ? (
-            <>
-              <Stock>Disponible</Stock>
-            </>
-          ) : (
-            <>
-              {" "}
-              <NoStock>No Disponible</NoStock>
-            </>
-          )}
+              {stock === true ? (
+                <>
+                  <Stock>Disponible</Stock>
+                </>
+              ) : (
+                <>
+                  {" "}
+                  <NoStock>No Disponible</NoStock>
+                </>
+              )}
 
-          <FilterContainer>
-            <Filter>
-              <FilterTitle>Color</FilterTitle>
-              {product.color?.map((c) => (
-                <FilterColor color={c} key={c} onClick={() => setColor(c)} />
-              ))}
-            </Filter>
-            <Filter>
-              <FilterTitle>Talla</FilterTitle>
-              <FilterSize onChange={(e) => setSize(e)}>
-                {product.size?.map((s, id) => (
-                  <FilterSizeOption key={id}>{s}</FilterSizeOption>
-                ))}
-              </FilterSize>
-            </Filter>
-          </FilterContainer>
+              <FilterContainer>
+                <Filter>
+                  <FilterTitle>Color</FilterTitle>
+                  {product.color?.map((c) => (
+                    <FilterColor
+                      color={c}
+                      key={c}
+                      onClick={() => setColor(c)}
+                    />
+                  ))}
+                </Filter>
+                <Filter>
+                  <FilterTitle>Talla</FilterTitle>
+                  <FilterSize onChange={(e) => setSize(e)}>
+                    {product.size?.map((s, id) => (
+                      <FilterSizeOption key={id}>{s}</FilterSizeOption>
+                    ))}
+                  </FilterSize>
+                </Filter>
+              </FilterContainer>
 
-          <AddContainer>
-            <Button onClick={handleAddToCart}>Añadir al Carro</Button>
-          </AddContainer>
-        </InfoContainer>
-      </Wrapper>
+              <AddContainer>
+                <Button onClick={handleAddToCart}>Añadir al Carro</Button>
+              </AddContainer>
+            </InfoContainer>
+          </Wrapper>
+        )}
+      </>
 
       <Footer />
     </Container>
