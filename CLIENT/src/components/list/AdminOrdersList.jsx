@@ -3,7 +3,7 @@ import React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { ordersEdit, ordersFetch } from "../../redux/ordersRedux";
 
@@ -80,7 +80,9 @@ export default function AdminOrdersList() {
             <DeliveredBtn onClick={() => handleOrderDelivered(params.row.id)}>
               Enviar
             </DeliveredBtn>
-            <View onClick={() => navigate(`/order/${params.row.id}`)}>Ver</View>
+            <Link to={`/orden/${params.row.id}`}>
+              <View>Ver</View>
+            </Link>
           </Actions>
         );
       },

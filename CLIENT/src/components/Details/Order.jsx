@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import { setHeaders, url } from "../../slices/api";
+import { setHeaders, url } from "../../redux/api";
 
 const Order = () => {
   const params = useParams();
@@ -16,7 +16,7 @@ const Order = () => {
       try {
         setLoading(true);
         const res = await axios.get(
-          `${url}/orders/findOne/${params.id}`,
+          `${url}/orders/find/${params.id}`,
           setHeaders()
         );
 

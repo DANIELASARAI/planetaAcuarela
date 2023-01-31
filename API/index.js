@@ -8,7 +8,7 @@ const registerRoute = require("./routes/register");
 const loginRoute = require("./routes/login");
 const productRoute = require("./routes/products");
 const cartRoute = require("./routes/cart");
-const orderRoute = require("./routes/order");
+const orderRoute = require("./routes/orders");
 const stripeRoute = require("./routes/stripe");
 const cors = require("cors");
 
