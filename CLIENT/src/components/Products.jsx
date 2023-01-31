@@ -19,7 +19,7 @@ const Products = ({ cat, filters, sort, subCat }) => {
 
   const [filteredProducts, setFilteredProducts] = useState([]);
 
-  let productsCategory = data.filter(function (product) {
+  let productsCategory = data?.filter(function (product) {
     return product.categories == planet;
   });
   console.log(
