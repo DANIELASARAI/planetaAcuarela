@@ -16,7 +16,6 @@ import { logoutUser } from "../redux/authRedux";
 import { mobile } from "../responsive";
 
 import logo from "../img/acuarela.png";
-import PlanetPopover from "./PlanetPopover";
 
 //1.1 We could use div className container and create a css file .container class,
 //or we can use styled container like this Useful for larger applications.
@@ -75,8 +74,7 @@ const Right = styled.div`
   display: flex;
   align-items: center;
   //1.14
-
-  justify-content: space-between;
+  justify-content: flex-end;
   ${mobile({ flex: 3, justifyContent: "center" })};
 `;
 //1.13 Create the items for the right side, then insert into Right container,
@@ -114,12 +112,11 @@ const AdminItem = styled.div`
   cursor: pointer;
   display: flex;
   font-family: Poppins;
-  margin-right: 20px;
+  margin-left: 25px;
   color: #853b7d;
 
-  ${mobile({ fontSize: "12px", marginLeft: "20px" })};
+  ${mobile({ fontSize: "12px", marginLeft: "10px" })};
 `;
-
 //1.7 Language element, to then be displayed on Left parent
 const Language = styled.span`
   font-size: 12px;
@@ -143,14 +140,6 @@ const Input = styled.input`
   ${mobile({ width: "40px" })};
   border-radius: 15px;
 `;
-const PlanetItem = styled.div`
-  font-size: 12px;
-  cursor: pointer;
-  display: flex;
-
-  font-family: Poppins;
-  color: #853b7d;
-`;
 
 const Navbar = () => {
   const { cartTotalQuantity } = useSelector((state) => state.cart);
@@ -172,7 +161,7 @@ const Navbar = () => {
             <img src={logo} width={80} />
           </StyledIconButton>
         </Left>
-        <Center> </Center>
+        <Center></Center>
         <Right>
           {auth._id ? (
             <Right admin={adminPath}>
@@ -181,9 +170,6 @@ const Navbar = () => {
                   <AdminPanelSettingsIcon />
                 </AdminItem>
               ) : null}
-              <PlanetItem>
-                <PlanetPopover />
-              </PlanetItem>
               <MenuItem
                 onClick={() => {
                   dispatch(logoutUser(null));
