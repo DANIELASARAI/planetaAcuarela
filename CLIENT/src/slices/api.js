@@ -1,4 +1,4 @@
-export const url = "https://planeta-acuarela.vercel.app/api/";
+export const url = "https://planeta-acuarela.vercel.app/api";
 
 export const setHeaders = () => {
   const headers = {
