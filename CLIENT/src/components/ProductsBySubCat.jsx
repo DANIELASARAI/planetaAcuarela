@@ -16,18 +16,10 @@ const ProductsBySubCat = ({ cat, filters, sort, subCat }) => {
   const [productsBySubCat, setProductsBySubCat] = useState([]);
 
   const [filteredProducts, setFilteredProducts] = useState([]);
-  console.log(
-    "🚀 ~ file: Products.jsx:24 ~ Products ~ filteredProducts",
-    filteredProducts
-  );
 
   let productsSubCategory = data?.filter(function (product) {
     return product.subCategories == subCat;
   });
-  console.log(
-    "🚀 ~ file: ProductsBySubCat.jsx:29 ~ productsSubCategory ~ productsSubCategory",
-    productsSubCategory
-  );
 
   useEffect(() => {
     const getProductsBySubCat = async () => {
@@ -68,10 +60,10 @@ const ProductsBySubCat = ({ cat, filters, sort, subCat }) => {
   return (
     <Container>
       {subCat
-        ? filteredProducts.map((item) => <Product item={item} key={item.id} />)
+        ? filteredProducts.map((item) => <Product item={item} key={item._id} />)
         : productsBySubCat
             .slice(0, 8)
-            .map((item) => <Product item={item} key={item.id} />)}
+            .map((item) => <Product item={item} key={item._id} />)}
     </Container>
   );
 };

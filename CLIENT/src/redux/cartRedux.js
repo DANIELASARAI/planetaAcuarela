@@ -40,7 +40,7 @@ const cartSlice = createSlice({
       //1) First, set products to localStorage, then get i and replace the initial products state above.
       localStorage.setItem("products", JSON.stringify(state.products));
     },
-    removeFromCart(state, action) {
+    /*     removeFromCart(state, action) {
       const nextCartItems = state.products?.filter(
         (product) => product._id !== action.payload._id
       );
@@ -48,8 +48,26 @@ const cartSlice = createSlice({
       toast.error(`${action.payload.name} se ha removido del carro!`, {
         position: "bottom-left",
       });
-      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+      localStorage.setItem("products", JSON.stringify(state.products));
       return state;
+    }, */
+
+    removeFromCart(state, action) {
+      state.products?.map((product) => {
+        if (product._id === action.payload._id) {
+          const nextCartItems = state.products?.filter(
+            (item) => item._id !== product._id
+          );
+
+          state.products = nextCartItems;
+
+          toast.error(`${action.payload.name} se ha removido del carro!`, {
+            position: "bottom-left",
+          });
+        }
+        localStorage.setItem("products", JSON.stringify(state.products));
+        return state;
+      });
     },
     decreaseCart(state, action) {
       const itemIndex = state.products.findIndex(

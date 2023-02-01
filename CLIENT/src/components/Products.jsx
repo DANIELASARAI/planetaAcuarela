@@ -20,10 +20,10 @@ const Products = ({ cat, filters, sort, subCat }) => {
   const [filteredProducts, setFilteredProducts] = useState([]);
 
   let productsCategory = data?.filter(function (product) {
-    return product.categories == planet;
+    return product.categories.includes(planet);
   });
   console.log(
-    "🚀 ~ file: Products.jsx:25 ~ productsCategory ~ productsCategory",
+    "🚀 ~ file: Products.jsx:27 ~ productsCategory ~ productsCategory",
     productsCategory
   );
 
@@ -66,8 +66,10 @@ const Products = ({ cat, filters, sort, subCat }) => {
   return (
     <Container>
       {cat
-        ? filteredProducts?.map((item) => <Product item={item} key={item.id} />)
-        : productsByCat?.map((item) => <Product item={item} key={item.id} />)}
+        ? filteredProducts?.map((item) => (
+            <Product item={item} key={item._id} />
+          ))
+        : productsByCat?.map((item) => <Product item={item} key={item._id} />)}
     </Container>
   );
 };

@@ -100,6 +100,7 @@ const CreateProduct = () => {
   };
   const handleColor = (e) => {
     setColor(e.target.value);
+    console.log(e.target.value);
   };
   const handleGender = (e) => {
     setGender(e.target.value);

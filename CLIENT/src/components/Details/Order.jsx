@@ -7,7 +7,6 @@ import { setHeaders, url } from "../../slices/api";
 const Order = () => {
   const params = useParams();
   const [order, setOrder] = useState({});
-  console.log("🚀 ~ file: Order.jsx:10 ~ Order ~ order", order);
 
   const [loading, setLoading] = useState(false);
 

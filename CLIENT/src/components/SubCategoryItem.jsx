@@ -50,20 +50,20 @@ const SubCategoryItem = ({ item, subCat }) => {
       <Link to={`/${subCat}`}>
         <Image src={item.img} />
         <Info>
-          <Title>{item.title}</Title>
           <Button
             onClick={() => {
               setSubCategory(subCat);
               setOpenSubscribe(true);
             }}
           >
-            COMPRAR AHORA{" "}
+            Personaliza tus{" "}
             <Subscribe
               subCat={subCategory}
               open={openSubscribe}
               close={() => setOpenSubscribe(false)}
             />
           </Button>
+          <Title>{item.title}</Title>
         </Info>
       </Link>
     </Container>

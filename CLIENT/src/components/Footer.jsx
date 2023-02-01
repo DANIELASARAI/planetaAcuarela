@@ -116,7 +116,7 @@ const Footer = () => {
           {" "}
           <img src={logo} width={200} />
         </Logo>
-        <Desc>Mismo mundo, diferentes planetas.</Desc>
+        <Desc>Estampados y Sublimados.</Desc>
       </Left>
       <Center>
         <Title>Enlaces Útiles</Title>

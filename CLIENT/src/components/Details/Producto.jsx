@@ -48,7 +48,7 @@ const Producto = () => {
               <h3>{producto.name}</h3>
               <p>
                 <span>Planeta: </span>
-                {producto.categories}
+                {producto.categories?.join(", ")}
               </p>
               <p>
                 <span>Sub-Categoria: </span>
@@ -60,11 +60,11 @@ const Producto = () => {
               </p>
               <p>
                 <span>Color: </span>
-                {producto.color}
+                {producto.color?.join(", ")}
               </p>
               <p>
                 <span>Talla: </span>
-                {producto.size}
+                {producto.size?.join(", ")}
               </p>
               <Price>CLP {producto.price?.toLocaleString()}</Price>
               <button

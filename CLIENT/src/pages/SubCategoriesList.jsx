@@ -70,12 +70,17 @@ const SubCategoriesList = () => {
 
           <Select name="color" onChange={handleFilters}>
             <Option>Color</Option>
-            <Option>white</Option>
-            <Option>black</Option>
-            <Option>red</Option>
-            <Option>blue</Option>
-            <Option>pink</Option>
-            <Option>green</Option>
+            <Option>Color</Option>
+            <Option>blanco</Option>
+            <Option>negro</Option>
+            <Option>rojo</Option>
+            <Option>azul</Option>
+            <Option>rosa</Option>
+            <Option>verde</Option>
+            <Option>amarillo</Option>
+            <Option>naranja</Option>
+            <Option>gris</Option>
+            <Option>café</Option>
           </Select>
           <Select name="size" onChange={handleFilters}>
             <Option>Talla</Option>
