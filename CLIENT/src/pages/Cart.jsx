@@ -266,7 +266,7 @@ const Cart = () => {
                         </ProductId>
                         <ProductColor color={product.color} />
                         <ProductSize>
-                          <b>Talla:</b> {product.size}
+                          <b>Talla:</b> {product.size?.join(", ")}
                         </ProductSize>
                         <Amount>
                           <Amount>
