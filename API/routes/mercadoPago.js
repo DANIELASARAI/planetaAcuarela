@@ -67,9 +67,9 @@ router.post("/create_preference", (req, res) => {
     notification_url:
       "https://planeta-acuarela.vercel.app/api/mercadopago/notifications", //url where mercado pago sends a post request for this order
     back_urls: {
-      success: "https://planetacuarela/checkout-success",
-      failure: "https://planetacuarela/",
-      pending: "https://planetacuarela/",
+      success: "https://www.planetacuarela.com/checkout-success",
+      failure: "https://planetacuarela.com/",
+      pending: "https://planetacuarela.com/",
     },
     auto_return: "approved",
     binary_mode: true,
