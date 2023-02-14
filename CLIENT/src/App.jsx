@@ -1,8 +1,8 @@
 import "./App.css";
 import CheckoutSuccess from "./components/CheckoutSuccess";
+
 import { PlanetProvider } from "./context/PlanetContext";
 import Cart from "./pages/Cart";
-import GuestAddress from "./pages/GuestAddress";
 import Pagamento from "./pages/GuestPayment";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -22,11 +22,13 @@ import Users from "./components/admin/Users";
 import NotFound from "./components/NotFound";
 import ProductsTable from "./components/ProductsTable";
 
+import Address from "./components/Address";
 import Order from "./components/Details/Order";
 import Producto from "./components/Details/Producto";
 import UserProfile from "./components/Details/UserProfile";
 import AdminOrdersList from "./components/list/AdminOrdersList";
 import AdminProductsList from "./components/list/AdminProductsList";
+import SubscribedAddress from "./components/SubscribedAddress";
 import SubCategoriesList from "./pages/SubCategoriesList";
 
 const App = () => {
@@ -40,7 +42,8 @@ const App = () => {
           <Route path="/:subcat" element={<SubCategoriesList />} />
           <Route path="/product/:id" element={<Product />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/guest-address" element={<GuestAddress />} />
+          <Route path="/guest-address" element={<Address />} />
+          <Route path="/subscribed-address" element={<SubscribedAddress />} />
           <Route path="/pago" element={<Pagamento />} />
           <Route path="/checkout-success" element={<CheckoutSuccess />} />
           <Route path="/register" element={<Register />} />

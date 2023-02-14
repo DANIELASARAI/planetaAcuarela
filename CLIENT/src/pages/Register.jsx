@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { mobile } from "../responsive";
-import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../redux/authRedux";
+import { mobile } from "../responsive";
 
 const Container = styled.div`
   width: 100vw;
@@ -68,7 +68,7 @@ const Button = styled.button`
 
 const Register = () => {
   const auth = useSelector((state) => state.auth);
-  console.log("Initial Auth State: ", auth);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [user, setUser] = useState({

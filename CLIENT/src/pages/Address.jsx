@@ -1,10 +1,9 @@
 import React from "react";
 import Address from "../components/Address";
-
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 
-const GuestAddress = () => {
+const Address = () => {
   return (
     <div>
       <Navbar />
@@ -14,4 +13,4 @@ const GuestAddress = () => {
   );
 };
 
-export default GuestAddress;
+export default Address;

@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "nodemon": "^2.0.20",
     "numeral": "^2.0.6",
     "react-apexcharts": "^1.4.0"
   }

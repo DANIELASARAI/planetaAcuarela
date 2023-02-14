@@ -91,16 +91,13 @@ const CreateProduct = () => {
   const handleCategory = (e) => {
     let values = Array.from(e.target.value);
     setCategories(values);
-    console.log("Selected Categories: ", values);
   };
   const handleSize = (e) => {
     let sizeValues = Array.from(e.target.value);
     setSize(sizeValues);
-    console.log("Selected Sizes: ", sizeValues);
   };
   const handleColor = (e) => {
     setColor(e.target.value);
-    console.log(e.target.value);
   };
   const handleGender = (e) => {
     setGender(e.target.value);
@@ -108,7 +105,6 @@ const CreateProduct = () => {
   const handleSubCategories = (e) => {
     let subCatValues = Array.from(e.target.value);
     setSubCategories(subCatValues);
-    console.log("Selected SubCategory: ", subCatValues);
   };
 
   return (

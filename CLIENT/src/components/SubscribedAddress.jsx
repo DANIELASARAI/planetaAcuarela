@@ -6,7 +6,6 @@ import Add from "../icons/Add";
 import Shopping from "../icons/Shopping";
 import BillingAddressCard from "../page-sections/BillingAddressCard";
 import Heading from "../page-sections/Heading";
-import OrderSummery from "../page-sections/OrderSummary";
 import Stepper from "../page-sections/Stepper";
 import AppModal from "./AppModal";
 import AppRadio from "./AppRadio";
@@ -16,6 +15,7 @@ import FlexBox from "./Flexbox";
 import { H5 } from "./Typography";
 
 import Delete from "../icons/Delete";
+import MercadoSummary from "../page-sections/MercadoSummary";
 import { EmailClient } from "./EmailClient";
 
 const StyledFormControlLabel = styled(FormControlLabel)(() => ({
@@ -25,7 +25,7 @@ const StyledFormControlLabel = styled(FormControlLabel)(() => ({
   },
 }));
 
-const Address = () => {
+const SubscribedAddress = () => {
   const [openModal, setOpenModal] = useState(false);
   const [selectedValue, setSelectedValue] = useState("RUT");
 
@@ -39,12 +39,13 @@ const Address = () => {
   };
 
   const changeHandler = (ev) => {
+    console.log(ev.target.value);
     localStorage.setItem(ev.target.name, ev.target.value);
   };
 
   const handleSubmit = (e) => {
     setValues(localStorage);
-
+    console.log(values);
     setOpenModal(false);
   };
   return (
@@ -213,7 +214,7 @@ const Address = () => {
         </Grid>
 
         <Grid item md={4} xs={12}>
-          <OrderSummery
+          <MercadoSummary
             values={values}
             submit={handleSubmit}
             buttonText="Payment"
@@ -224,4 +225,4 @@ const Address = () => {
   );
 };
 
-export default Address;
+export default SubscribedAddress;

@@ -1,6 +1,8 @@
 import { useSelector } from "react-redux";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import styled from "styled-components";
+import Picture from "../img/adminDashboard.webp";
+import { mobile } from "../responsive";
 import Sidebar from "./Sidebar";
 
 /* const Wrapper = styled(Box)(({ theme, show }) => ({
@@ -19,6 +21,8 @@ import Sidebar from "./Sidebar";
 
 const Dashboard = ({ children }) => {
   const auth = useSelector((state) => state.auth);
+  const location = useLocation();
+  const adminPath = location.pathname === "/admin";
 
   if (!auth.isAdmin)
     return <p>Acceso denegado, usted no es un Administrador!</p>;
@@ -28,6 +32,12 @@ const Dashboard = ({ children }) => {
       <Sidebar />
       <Content>
         <Outlet />
+        {adminPath ? (
+          <CreatePicture>
+            {" "}
+            <img src={Picture} width={800} />
+          </CreatePicture>
+        ) : null}
       </Content>
     </StyledDashboard>
   );
@@ -45,4 +55,15 @@ const Content = styled.div`
 const StyledDashboard = styled.div`
   display: flex;
   height: 100vh;
+`;
+
+const CreatePicture = styled.div`
+  ${mobile({ display: "none" })};
+  margin: 6rem 12rem 20rem 20rem;
+  border: "none";
+  max-width: 350px;
+  width: 100%;
+  display: flex;
+  align-items: end;
+  justify-content: end;
 `;

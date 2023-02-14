@@ -5,7 +5,7 @@ import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { ordersEdit, ordersFetch } from "../../redux/ordersRedux";
+import { ordersDelete, ordersEdit, ordersFetch } from "../../redux/ordersRedux";
 
 export default function AdminOrdersList() {
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ export default function AdminOrdersList() {
   const rows = list?.map((order) => {
     return {
       id: order._id,
-      cName: order.shipping.name,
+      cName: order.name,
       amount: order.total,
       dStatus: order.delivery_status,
       date: moment(order.createdAt).fromNow(),
@@ -37,12 +37,12 @@ export default function AdminOrdersList() {
       headerName: "Nombre",
       width: 200,
     },
-    { field: "amount", headerName: "Monto", width: 150 },
+    { field: "amount", headerName: "Monto", width: 120 },
     {
       field: "dStatus",
       headerName: "Estado del envío",
 
-      width: 120,
+      width: 140,
       renderCell: (params) => {
         return (
           <div>
@@ -81,6 +81,7 @@ export default function AdminOrdersList() {
               Enviar
             </DeliveredBtn>
             <View onClick={() => navigate(`/orden/${params.row.id}`)}>Ver</View>
+            <Delete onClick={() => handleDelete(params.row.id)}>Borrar</Delete>
           </Actions>
         );
       },
@@ -92,6 +93,10 @@ export default function AdminOrdersList() {
   };
   const handleOrderDelivered = (id) => {
     dispatch(ordersEdit({ id, delivery_status: "delivered" }));
+  };
+
+  const handleDelete = (id) => {
+    dispatch(ordersDelete(id));
   };
 
   return (
@@ -118,6 +123,9 @@ const DeliveredBtn = styled.button`
 `;
 const View = styled.button`
   background-color: rgb(0, 192, 163);
+`;
+const Delete = styled.button`
+  background-color: rgb(255, 77, 73);
 `;
 const Pending = styled.button`
   color: rgb(253, 181, 40);

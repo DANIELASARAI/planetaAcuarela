@@ -35,10 +35,6 @@ const PlanetPopover = () => {
   /*   const { logout, user } = useAuth(); */
   const [open, setOpen] = useState(false);
   const auth = useSelector((state) => state.auth);
-  console.log(
-    "🚀 ~ file: PlanetPopover.jsx:38 ~ PlanetPopover ~ auth",
-    auth.name
-  );
 
   const handleMenuItem = (path) => {
     navigate(path);

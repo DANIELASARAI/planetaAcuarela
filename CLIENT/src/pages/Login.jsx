@@ -1,11 +1,9 @@
-import styled from "styled-components";
-import { mobile } from "../responsive";
-import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import styled from "styled-components";
 import { loginUser } from "../redux/authRedux";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { mobile } from "../responsive";
 
 const Container = styled.div`
   width: 100vw;
@@ -72,7 +70,7 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
-  console.log(auth.name);
+
   const [user, setUser] = useState({
     email: "",
     password: "",

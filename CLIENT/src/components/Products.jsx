@@ -14,7 +14,7 @@ const Container = styled.div`
 const Products = ({ cat, filters, sort, subCat }) => {
   const { items: data, status } = useSelector((state) => state.products);
   const { planet } = useContext(PlanetContext);
-  console.log("🚀 ~ file: Products.jsx:17 ~ Products ~ planet", planet);
+
   const [productsByCat, setProductsByCat] = useState([]);
 
   const [filteredProducts, setFilteredProducts] = useState([]);

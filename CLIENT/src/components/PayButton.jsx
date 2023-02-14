@@ -1,29 +1,15 @@
-import axios from "axios";
 import React from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { url } from "../slices/api";
 
 const PayButton = ({ cartItems }) => {
   const user = useSelector((state) => state.auth);
-
-  const handleCheckout = () => {
-    axios
-      .post(`${url}/stripe/create-checkout-session`, {
-        cartItems,
-        userId: user._id,
-      })
-      .then((res) => {
-        if (res.data.url) {
-          window.location.href = res.data.url;
-        }
-      })
-      .catch((err) => console.log(err.message));
-  };
+  const navigate = useNavigate();
 
   return (
     <>
-      <CheckOut onClick={() => handleCheckout()}>Pagar</CheckOut>
+      <CheckOut onClick={() => navigate("/subscribed-address")}>Pagar</CheckOut>
     </>
   );
 };
