@@ -9,7 +9,8 @@ require("dotenv").config();
 const router = express.Router();
 // Agrega credenciales
 mercadopago.configure({
-  access_token: process.env.MERCADOPAGO_SECRET,
+  access_token:
+    "APP_USR-7755728946194320-020215-b7146f5abcb7a19c4d40bc73a13dc764-1300548213",
 });
 
 router.post("/create_preference", (req, res) => {
