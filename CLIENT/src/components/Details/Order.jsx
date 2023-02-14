@@ -39,7 +39,7 @@ const Order = () => {
             <p>
               {" "}
               Estado de pago:{" "}
-              {order.payment_status === "paid" && <Pagada>Pagada</Pagada>}
+              {order.payment_status === "accredited" && <Pagada>Pagada</Pagada>}
             </p>
 
             <p>
@@ -59,21 +59,21 @@ const Order = () => {
               {order.products?.map((product, index) => (
                 <Item key={index}>
                   <span>{product.quantity}</span>
-                  <span>{product.description}</span>
-                  <span>{"CLP" + product.amount_total}</span>
+                  <span>{product.title}</span>
+                  <span>{"CLP " + product.unit_price}</span>
                 </Item>
               ))}
             </Items>
             <div>
-              <h3>Precio Total</h3>
+              <h3>Precio Total con Envío</h3>
               <p>{order.total + " CLP"}</p>
             </div>
             <h3>Detalles de Envío</h3>
-            <p>Cliente: {order.shipping?.name}</p>
-            <p>Ciudad: {order.shipping?.address?.city}</p>
-            <p>Dirección: {order.shipping?.address?.line1}</p>
-            <p>Email: {order.shipping?.email}</p>
-            <p>Teléfono: {order.shipping?.phone}</p>
+            <p>Cliente: {order.name}</p>
+            <p>Ciudad: {order.city}</p>
+            <p>Dirección: {order.shipping}</p>
+            <p>Email: {order.email}</p>
+            <p>Teléfono: {order.phone}</p>
           </OrdersContainer>
         </>
       )}

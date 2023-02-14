@@ -14,7 +14,7 @@ const AllTimeData = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await axios.get(`${url}/orders/?new=true`, setHeaders());
+        const res = await axios.get(`${url}/orders/`, setHeaders());
         setOrders(res.data);
       } catch (error) {
         console.log(error);

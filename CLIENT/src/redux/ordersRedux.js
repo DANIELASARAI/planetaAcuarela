@@ -44,6 +44,19 @@ export const ordersEdit = createAsyncThunk(
   }
 );
 
+export const ordersDelete = createAsyncThunk(
+  "orders/orderssDelete",
+  async (id) => {
+    try {
+      const response = await axios.delete(`${url}/orders/${id}`, setHeaders());
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response?.data);
+    }
+  }
+);
+
 const ordersReducer = createSlice({
   name: "orders",
   initialState,
@@ -73,6 +86,20 @@ const ordersReducer = createSlice({
     },
     [ordersEdit.rejected]: (state, action) => {
       state.editStatus = "rejected";
+    },
+    [ordersDelete.pending]: (state, action) => {
+      state.deleteStatus = "pending";
+    },
+    [ordersDelete.fulfilled]: (state, action) => {
+      const newList = state.items?.filter(
+        (item) => item._id !== action.payload._id
+      );
+      state.items = newList;
+      state.deleteStatus = "success";
+      toast.success("Orden Borrada!");
+    },
+    [ordersDelete.rejected]: (state, action) => {
+      state.deleteStatus = "rejected";
     },
   },
 });

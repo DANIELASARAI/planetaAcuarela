@@ -43,10 +43,6 @@ const Option = styled.option``;
 const SubCategoriesList = () => {
   const location = useLocation();
   const subCat = location.pathname.split("/")[1];
-  console.log(
-    "🚀 ~ file: SubCategoriesList.jsx:48 ~ SubCategoriesList ~ subCat",
-    subCat
-  );
 
   const [filters, setFilters] = useState({});
   const [sort, setSort] = useState("nuevo");

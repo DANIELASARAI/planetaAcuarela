@@ -10,6 +10,7 @@ const productRoute = require("./routes/products");
 const cartRoute = require("./routes/cart");
 const orderRoute = require("./routes/orders");
 const stripeRoute = require("./routes/stripe");
+const mercadoPagoRoute = require("./routes/mercadoPago");
 const cors = require("cors");
 
 dotenv.config();
@@ -38,6 +39,7 @@ app.use("/api/users", userRoute);
 app.use("/api/register", registerRoute);
 app.use("/api/login", loginRoute);
 app.use("/api/stripe", stripeRoute);
+app.use("/api/mercadoPago", mercadoPagoRoute);
 app.use("/api/products", productRoute);
 app.use("/api/carts", cartRoute);
 app.use("/api/orders", orderRoute);

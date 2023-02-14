@@ -8,10 +8,6 @@ export function PlanetProvider({ children }) {
   const location = useLocation();
 
   const pathContext = location.pathname.split("/")[2];
-  console.log(
-    "🚀 ~ file: PlanetContext.jsx:11 ~ PlanetProvider ~ pathContext",
-    pathContext
-  );
 
   return (
     <PlanetContext.Provider value={{ planet: pathContext }}>
